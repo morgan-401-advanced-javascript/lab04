@@ -1,20 +1,15 @@
 # lab04
-# LAB - 
+# LAB - Data Modeling
 
-## Project Name
-
-### Author: Student/Group Name
+### Author: Morgan Tatum Shaw
 
 ### Links and Resources
-* [submission PR](http://xyz.com)
-* [travis](http://xyz.com)
-* [back-end](http://xyz.com) (when applicable)
-* [front-end](http://xyz.com) (when applicable)
+* [submission PR](https://github.com/morgan-401-advanced-javascript/lab04/pull/1)
+* [travis](https://www.travis-ci.com/morgan-401-advanced-javascript/lab04)
 
 #### Documentation
 * [api docs](http://xyz.com) (API servers)
 * [jsdoc](http://xyz.com) (Server assignments)
-* [styleguide](http://xyz.com) (React assignments)
 
 ### Modules
 #### `modulename.js`
@@ -44,4 +39,4 @@ Usage Notes or examples
 * What assertions need to be / should be made?
 
 #### UML
-Link to an image of the UML for your application and response to events
+![UML](./assets/Lab4UML.jpg)

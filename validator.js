@@ -1,6 +1,7 @@
 'use strict';
 
 let validator = module.exports = {};
+const uuidValidate = require('uuid-validate');
 
 /**
  * Based on a set of rules, is the input valid?
@@ -26,6 +27,9 @@ validator.isValid = (input, rules) => {
   }
 };
 
+validator.isUUID = input => {
+  return uuidValidate(input, 4);
+};
 /**
  * Is this a string?
  * @param input
