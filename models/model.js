@@ -3,7 +3,7 @@
 const fs = require('fs');
 const util = require('util');
 const uuid = require('uuid/v4');
-// const validator = require('../lib/validator.js');
+const validator = require('../validator.js');
 
 const readFile = util.promisify(fs.readFile);
 const writeFile = util.promisify(fs.writeFile);
@@ -27,16 +27,17 @@ class Model {
 
   // CRUD: create
   async create(item) {
+    console.log(item);
     let isValid = this.sanitize(item);
-    let record = {id: uuid(),...item};
     if (isValid){
+      let record = {id: uuid(),...item};
       // adds to database obj
       this.database.push(record);
       //write to file
       await writeFile(this.file, JSON.stringify(this.database));
       return item;
     }
-    return 'invalid schema';
+    return 'invalid';
   }
 
   // CRUD: read
@@ -70,61 +71,40 @@ class Model {
       if(mapstuff.id === original.id){
         keys.forEach(key=>{
           // if(key === 'team'){
-            
-            
-            
           // }
           
           this.read(key, original[key]);
-    
-    
           // console.log('items in model for id', stuff[key]);
           // console.log('items in model for updates', updates[key]);
           mapstuff[key]= updates[key];
         });
-
       }
       // console.log(mapstuff);
       return mapstuff;
     });
-    
-    
-
-    
     await writeFile(this.file, JSON.stringify(newDatabase));
-    // console.log(this.database);
-    // console.log('model outcome',ids);
-    // console.log('files', newDatabase);
 
-
-  
-    // console.log('thing to update', thingToUpdate);
     // await 
     // console.log(
     //   Object.keys(updates));
-
-
-
     // let isValid = this.sanitize(item);
-
-    
-   
- 
-
-
-
-
-
-
   }
 
   // CRUD: delete
-  async delete(id) {}
+  async delete(id) {
+    console.log('id in model', id);
+    let data = await this.load();
+    let newData = data.filter(i => !(i.id === id));
+    console.log('newdatabase', newData);
+    await writeFile(this.file, JSON.stringify(newData));
+  }
 
   // Validation
   sanitize(item) {
     //check against schema
-    return true; //only for demo!!!!
+
+    return validator.isValid(this.schema, item);
+  
   }
 }
 

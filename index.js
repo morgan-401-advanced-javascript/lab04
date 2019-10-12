@@ -73,42 +73,59 @@ async function updatePerson(id, newData) {
       // create the team || get that new id || create person
       teamStuff = updateTeam;
     }
-    
   }
   console.log('team?', teamStuff.id);
-
-
   // console.log('personToUpdate: ', personToUpdate);
   let updateThePerson = await people.update(personToUpdate, { ...newData, team: teamStuff.id });
-  
-
-
   // console.log('function updateThePerson: ', updateThePerson);
-
   return updateThePerson;
-
-
-
-
 }
 
-async function deletePerson() {}
-
+async function deletePerson(value) {
+  let person = await findPerson(value);
+  await people.delete(person.id);
+}
+async function auditTeams(value) {
+  let teamData = await teams.load(value);
+  let peopleData = await people.load(value);
+  let teamIds = teamData.map(item=>{
+    return item.id;
+  });
+  let peepIds = peopleData.map(item=>{
+    return item.team;
+  });
+  let deleteThis = teamIds.filter(element => !peepIds.includes(element));
+  await teams.delete(deleteThis.toString());
+  
+}
 async function printTeams() {}
 
 async function runOperations() {}
 
 runOperations();
 
+// ***************** Test Audit Teams **********************
 
+// loadData().then(()=>{
+//   auditTeams();
+
+// });
+
+
+// ***************** Test Delete Person **********************
+
+// loadData().then(()=>{
+//   deletePerson('Natalie');
+
+// });
 
 // ******************** Test Update Person *************
 
-loadData().then(()=>{
-  updatePerson('Morgan', {firstName: 'Morgan',
-    team: 'cricket',
-  });
-});
+// loadData().then(()=>{
+//   updatePerson('Morgan', {firstName: 'Morgan',
+//     team: 'cricket',
+//   });
+// });
 
 
 
@@ -121,11 +138,11 @@ loadData().then(()=>{
 // });
 
 // ********* Test Create Person *******************
-// loadData().then(()=>{
-//   createPerson({
-//     firstName: 'Sarah',
-//     lastName: 'Small',
-//     team: 'yellow rhino',
-//   });
+loadData().then(()=>{
+  createPerson({
+    firstName: 9000,
+    lastName: 'Small',
+    team: 'yellow rhino',
+  });
 
-// });
+});

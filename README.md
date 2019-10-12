@@ -12,19 +12,21 @@
 * [jsdoc](http://xyz.com) (Server assignments)
 
 ### Modules
-#### `modulename.js`
+#### `model.js`
+#### `people.js`
+#### `teams.js`
 ##### Exported Values and Methods
-
-###### `foo(thing) -> string`
-Usage Notes or examples
-
-###### `bar(array) -> array`
-Usage Notes or examples
+*createPerson
+*findTeam
+*findPerson
+*readPerson
+*updatePerson
+*deletePerson
+*printTeams
+*runOperations
 
 ### Setup
-#### `.env` requirements
-* `PORT` - Port Number
-* `MONGODB_URI` - URL to the running mongo instance/db
+
 
 #### Running the app
 * `npm start`
@@ -34,7 +36,7 @@ Usage Notes or examples
   * Returns a JSON object with xyz in it.
   
 #### Tests
-* How do you run tests?
+* How do you run tests? npm test
 * What assertions were made?
 * What assertions need to be / should be made?
 
